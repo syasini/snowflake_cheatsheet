@@ -123,7 +123,7 @@ def database_segment():
         st.markdown("""
         💡 **Tips**
         - Follow consistent and meaningful naming conventions for `DATABASE` objects.
-        - Use a `TRANSIENT` `DATABASE` to improve query performance, isolate temporary data, and provide a dedicated space for intermediate results or temporary tables during specific analysis or transformation tasks.
+        - Use a `TRANSIENT` `DATABASE` to isolate temporary data, and provide a dedicated space for intermediate results or temporary tables during specific analysis or transformation tasks.
         - Utilize zero-copy cloning using `CREATE DATABASE <name> CLONE <source_db>` for efficient, space-saving `DATABASE` copies.
         - Configure `DATABASE` parameters for optimized performance and resource allocation.
         - Continuously analyze query and resource usage patterns to fine-tune `DATABASE` parameters for optimal performance and cost efficiency.
