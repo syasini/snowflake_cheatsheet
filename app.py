@@ -16,26 +16,30 @@ with exp_col:
 
                     But here's my recommendation:
 
-                    In a typical Snowflake work session, you may need to execute various commands, such as 
-                    cloning a database and schema, creating new tables or views, querying files on a stage, checking the status of a Snowpipe, managing data through manual copying, insertion, or updating, etc, etc ... the list is long!
+                    In a typical Snowflake work session, you might find yourself juggling various commands such as 
+                    cloning a database and schema, creating new tables or views, rummaging through files on a stage, keeping tabs on Snowpipe, wrangling data through manual copying, insertion, or updating, etc, etc ... the list is long!
 
-                    It can be challenging to remember the exact syntax for the numerous commands you might need, especially the ones you don't use frequenctly. 
-                    I recommend keeping this cheat sheet open in a tab while you work. This way, you can quickly reference the provided code snippets and easily copy and modify them as needed for your tasks. 
+                    Now, keeping the precise syntax of all these commands at your fingertips, especially for the less-frequently-used ones, can be quite a challenge. 
+                    I recommend keeping this cheat sheet open in a tab while you work. This way, you can swiftly refer to the provided code snippets and easily adapt them to your specific tasks. 
                     To keep things streamlit 🎈... sorry, I mean streamlined, I have removed options and arguments that are not frequently used in each command. 
-                    However, keep in mind that I have cherry-picked the options based on my personal workflow experience which may not necessarily reflect yours.     
+                    However, keep in mind that I have cherry-picked the options based on my personal workflow experience which may not necessarily align with yours.     
 
+                    Within each segment, there's a special treat ❄️: a bonus section with top tips to elevate your Snowflake skills.  
+                    I suggest that whenever you are using a command for the first time, spend a few minutes reading the tips and hopefully pick up something new.
+                    """)
+        
+        st.info("""
+                This guide is not intended to be a replacement for the official [Snowflake documentation](https://docs.snowflake.com/) (which is fantastic by the way!). 
+                    For a comprehensive reference of objects and methods, make sure to explore the official documentation.
+                """)
+        
+        st.markdown("""
+                    If you happen to spot any errors or have suggestions for improving the descriptions or tips, please don't hesitate to reach out to me directly [here](https://www.linkedin.com/in/siavash-yasini/), or open an [issue](https://github.com/syasini/snowflake_cheatsheet/issues/new) on the GitHub page. Your feedback is invaluable—and relied upon—in keeping this guide accurate and useful.
 
-                    Obviously, this guide is not intended to be a replacement for the official [Snowflake documentation](https://docs.snowflake.com/) (which is fantastic by the way!). 
-                    For a comprehensive reference of objects and methods, make sure to check the official documentation.
-
-                    For each segment, I have included a bonus section ❄️, which features a list of top tips to help enhance your Snowflake experience. 
-                    I suggest that whenever you are using a command for the first time, spend a few minutes reading the tips and hopefully learn something new.
-
-                    If you happen to notice any errors or mistakes in the descriptions or tips, feel free to reach out to me directly [here](https://www.linkedin.com/in/siavash-yasini/), or open an issue on the GitHub page. Your feedback is invaluable--and relied upon--in keeping this guide accurate and useful.
-
-                    👈 And lastly, don't forget to check the sidebar for additional info and layout options!
+                    👈 Don't forget to check the sidebar for additional info and layout options!
 
                     Now, go build something awesome on Snowflake! 🚀
+
                     """)
 
 st.sidebar.title("❄️ SnowFlake Cheatsheet 📄")
@@ -64,7 +68,7 @@ def database_segment():
         
         st_code_block("create-database", "create or replace an existing database",
         """
-        CREATE [ OR REPLACE ] [ TRANSIENT ] DATABASE [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] [ TRANSIENT ] DATABASE [ IF NOT EXISTS ] <database_name>
             [ CLONE <source_db> 
                 [ { AT | BEFORE } ( { TIMESTAMP => <timestamp> | OFFSET => <time_difference> } ) ] ]
             [ COMMENT = '<string_literal>' ]
@@ -77,19 +81,19 @@ def database_segment():
         
         st_code_block("alter-database", "rename a database",
         """
-        ALTER DATABASE [ IF EXISTS ] <name> RENAME TO <new_db_name>
+        ALTER DATABASE [ IF EXISTS ] <database_name> RENAME TO <new_db_name>
         """
         )
 
         st_code_block("alter-database", "swap two databases",
         """
-        ALTER DATABASE [ IF EXISTS ] <name> SWAP WITH <target_db_name>
+        ALTER DATABASE [ IF EXISTS ] <database_name> SWAP WITH <target_db_name>
         """
         )
 
         st_code_block("alter-database", "set database properties",
         """
-        ALTER DATABASE [ IF EXISTS ] <name> SET 
+        ALTER DATABASE [ IF EXISTS ] <database_name> SET 
             [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
             [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
             [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
@@ -100,7 +104,7 @@ def database_segment():
     with drop_tab:
         st_code_block("drop-database", "remove a database",
         """
-        DROP DATABASE [ IF EXISTS ] <name> 
+        DROP DATABASE [ IF EXISTS ] <database_name> 
         """
         )
 
@@ -140,7 +144,7 @@ def schema_segment():
     with create_tab:
         st_code_block("create-schema", "create or replace an existing schema",
         """
-        CREATE [ OR REPLACE ] [ TRANSIENT ] SCHEMA [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] [ TRANSIENT ] SCHEMA [ IF NOT EXISTS ] <schema_name>
             [ CLONE <source_schema>
                     [ { AT | BEFORE } ( { TIMESTAMP => <timestamp> | OFFSET => <time_difference> } ) ] ]
             [ COMMENT = '<string_literal>' ]
@@ -152,29 +156,30 @@ def schema_segment():
         
         st_code_block("alter-schema", "rename a schema",
         """
-        ALTER SCHEMA [ IF EXISTS ] <name> RENAME TO <new_schema_name>
+        ALTER SCHEMA [ IF EXISTS ] <schema_name> RENAME TO <new_schema_name>
         """
         )
 
         st_code_block("alter-schema", "swap two schemas",
         """
-        ALTER SCHEMA [ IF EXISTS ] <name> SWAP WITH <target_schema_name>
+        ALTER SCHEMA [ IF EXISTS ] <schema_name> SWAP WITH <target_schema_name>
         """
         )
 
         st_code_block("alter-schema", "set schema properties",
         """
-        ALTER SCHEMA [ IF EXISTS ] <name> SET [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
-                                        [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
-                                        [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
-                                        [ COMMENT = '<string_literal>' ]
+        ALTER SCHEMA [ IF EXISTS ] <schema_name> SET 
+            [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
+            [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
+            [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
+            [ COMMENT = '<string_literal>' ]
         """
         )
 
     with drop_tab:
         st_code_block("drop-schema", "remove a schema",
         """
-        DROP SCHEMA [ IF EXISTS ] <name> 
+        DROP SCHEMA [ IF EXISTS ] <schema_name> 
         """
         )
 
@@ -234,34 +239,35 @@ def table_segment():
 
         st_code_block("alter-table", "set table properties",
         """
-        ALTER TABLE [ IF EXISTS ] <name> SET [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
-                                        [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
-                                        [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
-                                        [ COMMENT = '<string_literal>' ]
+        ALTER TABLE [ IF EXISTS ] <table_name> SET 
+            [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
+            [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
+            [ ENABLE_SCHEMA_EVOLUTION = { TRUE | FALSE } ]
+            [ COMMENT = '<string_literal>' ]
         """
         )
 
         st_code_block("alter-table", "cluster columns of an existing table",
         """
-        ALTER TABLE [ IF EXISTS ] <name> CLUSTER BY ( <expr> [ , <expr> , ... ] )
+        ALTER TABLE [ IF EXISTS ] <table_name> CLUSTER BY ( <expr> [ , <expr> , ... ] )
         """
         )
 
         st_code_block("alter-table", "add column to an existing table",
         """
-        ALTER TABLE [ IF EXISTS ] <name> ADD [ COLUMN ] <col_name> <col_type>
+        ALTER TABLE [ IF EXISTS ] <table_name> ADD [ COLUMN ] <col_name> <col_type>
         """
         )
 
         st_code_block("alter-table", "drop column of an existing table",
         """
-        ALTER TABLE [ IF EXISTS ] <name> DROP [ COLUMN ] <col1_name> [, <col2_name> ... ]
+        ALTER TABLE [ IF EXISTS ] <table_name> DROP [ COLUMN ] <col1_name> [, <col2_name> ... ]
         """
         )
 
         st_code_block("alter-table", "rename column of an existing table",
         """
-        ALTER TABLE [ IF EXISTS ] <name> RENAME COLUMN <col_name> TO <new_col_name>
+        ALTER TABLE [ IF EXISTS ] <table_name> RENAME COLUMN <col_name> TO <new_col_name>
         """
         )
 
@@ -270,20 +276,20 @@ def table_segment():
     with drop_tab:
         st_code_block("drop-table", "remove an existing table",
         """
-        DROP TABLE [ IF EXISTS ] <name> 
+        DROP TABLE [ IF EXISTS ] <table_name> 
         """
         )
 
         st_code_block("drop-table", "restore the most recent dropped table",
         """
-        UNDROP TABLE <name> 
+        UNDROP TABLE <table_name> 
         """
         )
 
     with describe_tab:
         st_code_block("desc-table", "describe the table (e.g. show columns or values)",
         """
-        DESC TABLE <name> 
+        DESC TABLE <table_name> 
         """
         )
 
