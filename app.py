@@ -227,13 +227,13 @@ def table_segment():
         
         st_code_block("alter-table", "rename a table",
         """
-        ALTER TABLE [ IF EXISTS ] <name> RENAME TO <new_table_name>
+        ALTER TABLE [ IF EXISTS ] <table_name> RENAME TO <new_table_name>
         """
         )
 
         st_code_block("alter-table", "swap two tables",
         """
-        ALTER TABLE [ IF EXISTS ] <name> SWAP WITH <target_table_name>
+        ALTER TABLE [ IF EXISTS ] <table_name> SWAP WITH <target_table_name>
         """
         )
 
@@ -297,7 +297,7 @@ def table_segment():
         st_code_block("show-tables", "show available tables",
         """
         SHOW TABLES [ HISTORY ] [ LIKE '<pattern>' ]
-                                [ IN { ACCOUNT | DATABASE [ <db_name> ] | SCHEMA [ <schema_name> ] } ]
+                                [ IN { ACCOUNT | DATABASE [ <database_name> ] | SCHEMA [ <schema_name> ] } ]
         """
         )
         
