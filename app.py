@@ -1102,8 +1102,7 @@ def stream_segment():
         
         st_code_block("create-stream", "create or replace an existing stream on a table",
         """
-        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS]
-            <name>
+        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS] <stream_name>
             ON TABLE <table_name>
             [ APPEND_ONLY = TRUE | FALSE ]
             [ SHOW_INITIAL_ROWS = TRUE | FALSE ]
@@ -1113,8 +1112,7 @@ def stream_segment():
 
         st_code_block("create-stream", "create or replace an existing stream on a directory table",
         """
-        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS]
-            <name>
+        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS] <stream_name>
             ON STAGE <stage_name>
             [ COMMENT = '<string_literal>' ]
         """
@@ -1122,8 +1120,7 @@ def stream_segment():
 
         st_code_block("create-stream", "create or replace an existing stream on a view",
         """
-        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS]
-            <name>
+        CREATE [ OR REPLACE ] STREAM [IF NOT EXISTS] <stream_name>
             ON VIEW <view_name>
             [ APPEND_ONLY = TRUE | FALSE ]
             [ SHOW_INITIAL_ROWS = TRUE | FALSE ]
@@ -1136,7 +1133,7 @@ def stream_segment():
         
         st_code_block("alter-stream", "modify the comment on the stream",
         """
-        ALTER STREAM [ IF EXISTS ] <name> SET COMMENT = '<string_literal>'
+        ALTER STREAM [ IF EXISTS ] <stream_name> SET COMMENT = '<string_literal>'
         """
         )
 
@@ -1144,7 +1141,7 @@ def stream_segment():
     with drop_tab:
         st_code_block("drop-stream", "remove an existing stream",
         """
-        DROP STREAM [ IF EXISTS ] <name>
+        DROP STREAM [ IF EXISTS ] <stream_name>
         """
         )
 
@@ -1152,7 +1149,7 @@ def stream_segment():
     with describe_tab:
         st_code_block("desc-stream", "describe the columns in the stream",
         """
-        DESC STREAM <name> 
+        DESC STREAM <stream_name> 
         """
         )
 
