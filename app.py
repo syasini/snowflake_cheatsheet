@@ -318,11 +318,10 @@ def table_segment():
     with tips_tab:
         st.markdown("""
         💡 **Tips**
-        - Use normal `TABLE`s to store persistent data for long-term use. Use `TEMPORARY` `TABLE`s for session-specific data to automatically delet it at the end of the session. Use `TRANSIENT` `TABLE`s to hold temporary or intermediate data, typically used for short-term processing or query optimization.
-        - Use `CLUSTER BY` in `TABLE` creation to improve query performance by physically organizing data based on specified clustering keys. Arrange the clustering columns in order of increasing cardinality for better results.
+        - Use normal `TABLE`s to store persistent data for long-term use. Use `TEMPORARY` `TABLE`s for session-specific data to automatically delet it at the end of the session. Use `TRANSIENT` `TABLE`s to hold temporary or intermediate data which do not need a Fail-safe period (typically used for short-term processing or query optimization).
+        - Use `CLUSTER BY` in `TABLE` creation to improve query performance by physically organizing data based on specified clustering keys. Arrange the clustering columns in order of increasing cardinality for better results. Exercise caution when clustering large tables, as it can lead to significant costs.
         - Use `CREATE TABLE <table_name> LIKE <source_table>` to create a new `TABLE` with the same structure as an existing `TABLE`, saving time and effort.
         - Use `CREATE TABLE <table_name> CLONE <source_table>` to create an exact copy of an existing `TABLE`, including data and associated objects, for testing, development, or isolating workloads without duplicating data.
-
         """)
 
 
@@ -414,7 +413,7 @@ def view_segment():
         💡 **Tips**
         - Use `TEMPORARY` `VIEW`s when you need a `VIEW` that exists only for the duration of a session, providing a temporary and disposable data transformation or filtering mechanism during an analysis or query execution.
         - Use `MATRIALIZED` `VIEW`s when the underlying table or the subset of rows used in the view *don't change frequently*, the view results are *frequently used*, and the *query consumes significant resources*, such as processing time, credits, or storage space for intermediate results.
-        - Keep in mind that `MATERIALIZED` `VIEW`s cannot directly use joins, including self-joins, so consider using alternatives like `DYNAMIC TABLE`s or subqueries within `VIEW`s to achieve the desired functionality.
+        - Keep in mind that `MATERIALIZED` `VIEW`s cannot directly use `JOIN`s, including self-`JOIN`s, so consider using alternatives like `DYNAMIC TABLE`s or subqueries within `VIEW`s to achieve the desired functionality.
         - Optimize `VIEW`s by carefully designing underlying queries, minimizing unnecessary complexity, and avoiding redundant calculations.
         - Apply access control in `VIEW`s to enforce data security and privacy. Utilize Snowflake's robust access control mechanisms to grant appropriate privileges to users or roles, limiting data visibility based on business requirements and user roles.
         """)
@@ -514,9 +513,9 @@ def materialized_view_segment():
         st.markdown("""
         💡 **Tips**
         - `MATERIALIZED VIEW`s are beneficial when the query results are relatively small compared to the base table, contain data requiring extensive processing, or involve external tables with slower performance.
-        - Creating a `MATERIALIZED VIEW` incurs costs, and the decision to use them should be evaluated against the potential performance gains.
-        - Choose to create a `MATERIALIZED VIEW` when query results are stable, used frequently, and resource-intensive, or when saving processing time, and storage costs matter.
+        - Choose to create a `MATERIALIZED VIEW` when *query results are stable*, *used frequently*, and *resource-intensive*, or when saving processing time, and storage costs matter.
         - Opt for a regular `VIEW` when query results change often, aren't frequently used, or the query is not resource-intensive, and it's not costly to re-run.
+        - Creating a `MATERIALIZED VIEW` incurs costs, and the decision to use them should be evaluated against the potential performance gains.
         - `MATERIALIZED VIEW`s are limited to querying a single table and cannot support `JOIN`s, including self-`JOIN`s. They are also unable to query `MATERIALIZED VIEW`s, regular `VIEW`s, or user-defined `FUNCTION`s (`UDF`). See the full list of limitations [here](https://docs.snowflake.com/en/user-guide/views-materialized).
         """)
 
@@ -1475,7 +1474,7 @@ def dynamic_table_segment():
         💡 **Tips**
         - Establish `DYNAMIC TABLE`s to create chains of data dependencies, similar to creating a directed acyclic graph (DAG) of tasks. `DYNAMIC TABLE`s are automatically updated, or "refreshed," when the underlying data changes. 
         - Avoid `INSERT`, `UPDATE`, or `DELETE` operations on `DYNAMIC TABLE`s, as changes are automated during refresh processes.
-        - When your transformation relies on a **single base table** and transparent query optimization for improved performance, `MATERIALIZED VIEW`s may be a better choice, as they are designed to enhance query performance transparently.
+        - When your transformation relies on a *single base table*, `MATERIALIZED VIEW`s may be a better choice, as they are designed to enhance query performance transparently.
         - If your data transformation requires non-declarative, imperative code with calls to stored `PROCEDURE`s, `UDF`s, or external `FUNCTION`s, `TASK`s and `STREAM`s may be a better choice than `DYNAMIC TABLE`s.
         - Ensure your `TARGET_LAG` setting aligns with your data freshness requirements, but avoid overly frequent refreshes that may lead to unnecessary compute costs. use `DOWNSTREAM` to refresh on-demand when other dependent `DYNAMIC TABLE`s need to refresh, ensuring data consistency.
         """)
@@ -1676,23 +1675,23 @@ def data_manipulation_segment():
 
 left_column_defaults = [
     "🗄 database", 
-    "🗃 schema", 
-    "🚉 stage",
-    "📋 task",
-    "🌊 stream",
-    "🪄 function", 
-    "🪜 procedure",
-    ]
-
-right_column_defaults = [
+    "🗃 schema",
     "📊 table", 
     "🔎 view",
     "📸 materialized view",
-    "🔄 dynamic table",
+    "🔄 dynamic table", 
+    "📋 task",
+    "🌊 stream",
+     "🚨 alert",
+    ]
+
+right_column_defaults = [
+    "🚉 stage",
     "🚚 data loading",
     "🌀 data manipulation",
+    "🪄 function", 
+    "🪜 procedure",
     "🚰 pipe",
-    "🚨 alert",
     ]
 
 all_segments = left_column_defaults + right_column_defaults
