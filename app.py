@@ -1185,7 +1185,7 @@ def function_segment():
         with python_tab:
             st_code_block("create-function", "create or replace an existing Python UDF (user-defined function)",
             """
-            CREATE [ OR REPLACE ] [ TEMPORARY ] FUNCTION [ IF NOT EXISTS ] <name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
+            CREATE [ OR REPLACE ] [ TEMPORARY ] FUNCTION [ IF NOT EXISTS ] <func_name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
                 RETURNS { <result_data_type> | TABLE ( <col_name> <col_data_type> [ , ... ] ) }
                 [ [ NOT ] NULL ]
                 LANGUAGE PYTHON
@@ -1202,7 +1202,7 @@ def function_segment():
         with sql_tab:
             st_code_block("create-function", "create or replace an existing SQL UDF (user-defined function)",
             """
-            CREATE [ OR REPLACE ] [ TEMPORARY ] FUNCTION <name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
+            CREATE [ OR REPLACE ] [ TEMPORARY ] FUNCTION <func_name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
                 RETURNS { <result_data_type> | TABLE ( <col_name> <col_data_type> [ , ... ] ) }
                 [ [ NOT ] NULL ]
                 [ MEMOIZABLE ]
@@ -1229,13 +1229,13 @@ def function_segment():
         
         st_code_block("alter-function", "rename the UDF (user-defined function)",
         """
-        ALTER FUNCTION [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] ) RENAME TO <new_name>
+        ALTER FUNCTION [ IF EXISTS ] <func_name> ( [ <arg_data_type> , ... ] ) RENAME TO <new_name>
         """
         )
 
         st_code_block("alter-function", "modify the comment on the UDF (user-defined function)",
         """
-        ALTER FUNCTION [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] ) SET COMMENT = '<string_literal>'
+        ALTER FUNCTION [ IF EXISTS ] <func_name> ( [ <arg_data_type> , ... ] ) SET COMMENT = '<string_literal>'
         """
         )
 
@@ -1243,7 +1243,7 @@ def function_segment():
     with drop_tab:
         st_code_block("drop-function", "remove an existing UDF (user-defined function)",
         """
-        DROP FUNCTION [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] )
+        DROP FUNCTION [ IF EXISTS ] <func_name> ( [ <arg_data_type> , ... ] )
         """
         )
 
@@ -1251,7 +1251,7 @@ def function_segment():
     with describe_tab:
         st_code_block("desc-function", "describe the parameters of the UDF (user-defined function)",
         """
-        DESC FUNCTION <name> ( [ <arg_data_type> ] [ , ... ] )
+        DESC FUNCTION <func_name> ( [ <arg_data_type> ] [ , ... ] )
         """
         )
 
