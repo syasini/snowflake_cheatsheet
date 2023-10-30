@@ -716,7 +716,7 @@ def pipe_segment():
         with s3_tab:
             st_code_block("create-pipe", "create or replace a pipe from Amazon S3",
             """
-            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <name>
+            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <pipe_name>
                 [ AUTO_INGEST = [ TRUE | FALSE ] ]
                 [ ERROR_INTEGRATION = <integration_name> ]
                 [ AWS_SNS_TOPIC = '<string>' ]
@@ -728,7 +728,7 @@ def pipe_segment():
         with azure_tab:
             st_code_block("create-pipe", "create or replace a pipe from Microsoft Azure",
             """
-            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <name>
+            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <pipe_name>
                 [ AUTO_INGEST = [ TRUE | FALSE ] ]
                 [ ERROR_INTEGRATION = <integration_name> ]
                 [ INTEGRATION = '<string>' ]
@@ -740,7 +740,7 @@ def pipe_segment():
         with gcp_tab:
             st_code_block("create-pipe", "create or replace a pipe from Google Cloud Storage",
             """
-            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <name>
+            CREATE [ OR REPLACE ] PIPE [ IF NOT EXISTS ] <pipe_name>
                 [ AUTO_INGEST = [ TRUE | FALSE ] ]
                 [ ERROR_INTEGRATION = <integration_name> ]
                 [ INTEGRATION = '<string>' ]
@@ -754,14 +754,14 @@ def pipe_segment():
         
         st_code_block("alter-pipe", "change the properties of an existing pipe",
         """
-        ALTER PIPE [ IF EXISTS ] <name> SET { PIPE_EXECUTION_PAUSED = { TRUE | FALSE }
-                                      [ COMMENT = '<string_literal>' ] }
+        ALTER PIPE [ IF EXISTS ] <pipe_name> SET { PIPE_EXECUTION_PAUSED = { TRUE | FALSE }
+            [ COMMENT = '<string_literal>' ] }
         """
         )
 
         st_code_block("alter-pipe", "refresh the pipe to copy staged files that were not loaded",
         """
-        ALTER PIPE [ IF EXISTS ] <name> REFRESH { [ PREFIX = '<path>' ] [ MODIFIED_AFTER = <start_time> ] }
+        ALTER PIPE [ IF EXISTS ] <pipe_name> REFRESH { [ PREFIX = '<path>' ] [ MODIFIED_AFTER = <start_time> ] }
         """
         )
 
@@ -769,7 +769,7 @@ def pipe_segment():
     with drop_tab:
         st_code_block("drop-pipe", "remove an existing pipe",
         """
-        DROP PIPE [ IF EXISTS ] <name>
+        DROP PIPE [ IF EXISTS ] <pipe_name>
         """
         )
 
@@ -777,7 +777,7 @@ def pipe_segment():
     with describe_tab:
         st_code_block("desc-pipe", "describe the properties of the pipe (e.g. create date, definition, pattern)",
         """
-        DESC PIPE <name> 
+        DESC PIPE <pipe_name> 
         """
         )
 
