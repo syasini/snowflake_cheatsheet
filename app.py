@@ -702,7 +702,7 @@ def stage_segment():
         💡 **Tips**
         - See [this guide](https://docs.snowflake.com/en/user-guide/data-load-s3-config) for various options to configure secure access to a private Amazon S3 bucket. 
         - Use `DIRECTORY` tables to efficiently store and catalog staged files, allowing seamless querying to retrieve URLs for the staged files, along with other essential metadata.
-        - Use `EXTERNAL` tables when you want to access and query data that resides in external cloud storage (e.g.AWS S3) without copying or moving the data into Snowflake.
+        - Use `EXTERNAL` tables when you want to access and query data that resides in external cloud storage (e.g. AWS S3) without copying or moving the data into Snowflake.
         """)
 
 def pipe_segment():
@@ -974,9 +974,9 @@ def data_loading_segment():
         st.markdown("💡 **Tips**")
     
         st.markdown("- Use `COPY INTO` when you have static files or batch data that needs to be loaded into Snowflake. `COPY INTO` provides more control and flexibility over the loading process compared to pipes.")
-        st.markdown("- Use `PIPE`s when you need to ingest real-time or near real-time streaming data into Snowflake (see the Pipes segment).")
+        st.markdown("- Use `PIPE`s when you need to ingest real-time or near real-time streaming data into Snowflake (see the 🚰 **Pipe**s segment).")
         st.markdown("- Distribute your data across multiple files or use file compression to take advantage of parallel loading and improve loading speed.")
-        st.markdown("- By default `COPY_INTO` will not load files that have already been transfered within the past 64 days. Use `FORCE = TRUE` to enforce loading all files regardless of loading history. Note the this will potentially duplicate data in the target table.")
+        st.markdown("- By default `COPY_INTO` will not load files that have already been transfered within *the past 64 days*. Use `FORCE = TRUE` to enforce loading all files regardless of loading history. Note the this will potentially duplicate data in the target table.")
     
 
 def task_segment():
