@@ -334,7 +334,7 @@ def view_segment():
         
         st_code_block("create-view", "create or replace an existing view",
         """
-        CREATE [ OR REPLACE ] [ TEMPORARY ] VIEW [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] [ TEMPORARY ] VIEW [ IF NOT EXISTS ] <view_name>
             [ ( <column_list> ) ]
             AS <select_statement>
         """
@@ -345,41 +345,42 @@ def view_segment():
         
         st_code_block("alter-view", "rename a view",
         """
-        ALTER VIEW [ IF EXISTS ] <name> RENAME TO <new_view_name>
+        ALTER VIEW [ IF EXISTS ] <old_view_name> RENAME TO <new_view_name>
         """
         )
 
         st_code_block("alter-view", "add comment to view",
         """
-        ALTER VIEW [ IF EXISTS ] <name> SET COMMENT = '<string_literal>'
+        ALTER VIEW [ IF EXISTS ] <view_name> SET COMMENT = '<string_literal>'
         """
         )
 
         st_code_block("alter-view", "remove comment from view",
         """
-        ALTER VIEW [ IF EXISTS ] <name> UNSET COMMENT
+        ALTER VIEW [ IF EXISTS ] <view_name> UNSET COMMENT
         """
         )
 
         st_code_block("alter-view", "set table properties",
         """
-        ALTER TABLE [ IF EXISTS ] <name> SET [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
-                                        [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
-                                        [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
-                                        [ COMMENT = '<string_literal>' ]
+        ALTER TABLE [ IF EXISTS ] <view_name> SET 
+            [ DATA_RETENTION_TIME_IN_DAYS = <integer> ]
+            [ MAX_DATA_EXTENSION_TIME_IN_DAYS = <integer> ]
+            [ DEFAULT_DDL_COLLATION = '<collation_specification>' ]
+            [ COMMENT = '<string_literal>' ]
         """
         )
 
         st_code_block("alter-view", "add masking policy to columns of the view",
         """
-        ALTER VIEW <name> { ALTER | MODIFY } [ COLUMN ] <col_name> SET MASKING POLICY <policy_name> [ USING ( <col_name> , cond_col_1 , ... ) ]
+        ALTER VIEW <view_name> { ALTER | MODIFY } [ COLUMN ] <col_name> SET MASKING POLICY <policy_name> [ USING ( <col_name> , cond_col_1 , ... ) ]
         """
         )
 
     with drop_tab:
         st_code_block("drop-view", "remove an existing view",
         """
-        DROP VIEW [ IF EXISTS ] <name> 
+        DROP VIEW [ IF EXISTS ] <view_name> 
         """
         )
 
@@ -387,7 +388,7 @@ def view_segment():
     with describe_tab:
         st_code_block("desc-view", "describe the columns in view",
         """
-        DESC VIEW <name> 
+        DESC VIEW <view_name> 
         """
         )
 
