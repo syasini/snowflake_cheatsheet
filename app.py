@@ -429,7 +429,7 @@ def materialized_view_segment():
         
         st_code_block("create-materialized-view", "create or replace an existing materialized view",
         """
-        CREATE [ OR REPLACE ] [ TEMPORARY ] MATERIALIZED VIEW [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] [ TEMPORARY ] MATERIALIZED VIEW [ IF NOT EXISTS ] <mat_view_name>
             [ ( <column_list> ) ]
             [ CLUSTER BY ( <expr1> [, <expr2> ... ] ) ]
             AS <select_statement>
@@ -441,37 +441,37 @@ def materialized_view_segment():
         
         st_code_block("alter-materialized-view", "rename a materialized view",
         """
-        ALTER MATERIALIZED VIEW [ IF EXISTS ] <name> RENAME TO <new_view_name>
+        ALTER MATERIALIZED VIEW [ IF EXISTS ] <old_mat_view_name> RENAME TO <new_mat_view_name>
         """
         )
 
         st_code_block("alter-materialized-view", "suspend or resume the materialized view",
         """
-        ALTER MATERIALIZED VIEW <name>  { SUSPEND | RESUME }
+        ALTER MATERIALIZED VIEW <mat_view_name>  { SUSPEND | RESUME }
         """
         )
 
         st_code_block("alter-materialized-view", "add clustering to the materialized view",
         """
-        ALTER MATERIALIZED VIEW <name>  CLUSTER BY ( <expr1> [, <expr2> ... ] )
+        ALTER MATERIALIZED VIEW <mat_view_name>  CLUSTER BY ( <expr1> [, <expr2> ... ] )
         """
         )
         
         st_code_block("alter-materialized-view", "drop, suspend, or resume clustering on the materialized view",
         """
-        ALTER MATERIALIZED VIEW <name>  { DROP CLUSTERING KEY | SUSPEND RECLUSTER | RESUME RECLUSTER }
+        ALTER MATERIALIZED VIEW <mat_view_name>  { DROP CLUSTERING KEY | SUSPEND RECLUSTER | RESUME RECLUSTER }
         """
         )
 
         st_code_block("alter-materialized-view", "add comment to materialized view",
         """
-        ALTER MATERIALIZED VIEW [ IF EXISTS ] <name> SET COMMENT = '<string_literal>'
+        ALTER MATERIALIZED VIEW [ IF EXISTS ] <mat_view_name> SET COMMENT = '<string_literal>'
         """
         )
 
         st_code_block("alter-materialized-view", "remove comment from materialized view",
         """
-        ALTER MATERIALIZED VIEW [ IF EXISTS ] <name> UNSET COMMENT
+        ALTER MATERIALIZED VIEW [ IF EXISTS ] <mat_view_name> UNSET COMMENT
         """
         )
 
@@ -481,7 +481,7 @@ def materialized_view_segment():
     with drop_tab:
         st_code_block("drop-materialized-view", "remove an existing materialized view",
         """
-        DROP MATERIALIZED VIEW [ IF EXISTS ] <name> 
+        DROP MATERIALIZED VIEW [ IF EXISTS ] <mat_view_name> 
         """
         )
 
@@ -489,7 +489,7 @@ def materialized_view_segment():
     with describe_tab:
         st_code_block("desc-materialized-view", "describe the columns in materialized view",
         """
-        DESC MATERIALIZED VIEW <name> 
+        DESC MATERIALIZED VIEW <mat_view_name> 
         """
         )
 
