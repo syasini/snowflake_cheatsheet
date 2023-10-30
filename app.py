@@ -1413,7 +1413,7 @@ def dynamic_table_segment():
         
         st_code_block("create-dynamic-table", "create or replace an existing dynamic table",
         """
-        CREATE [ OR REPLACE ] DYNAMIC TABLE <name>
+        CREATE [ OR REPLACE ] DYNAMIC TABLE <dyn_table_name>
             TARGET_LAG = { '<num> { seconds | minutes | hours | days }' | DOWNSTREAM }
             WAREHOUSE = <warehouse_name>
             AS <query>
@@ -1426,19 +1426,19 @@ def dynamic_table_segment():
         
         st_code_block("alter-dynamic-table", "resume or suspend the dynamic table",
         """
-        ALTER DYNAMIC TABLE [ <name> ] { SUSPEND | RESUME }
+        ALTER DYNAMIC TABLE <dyn_table_name>  { SUSPEND | RESUME }
         """
         )
 
         st_code_block("alter-dynamic-table", "manually refresh the dynamic table",
         """
-        ALTER DYNAMIC TABLE [ <name> ] REFRESH
+        ALTER DYNAMIC TABLE <dyn_table_name> REFRESH
         """
         )
 
         st_code_block("alter-dynamic-table", "update the target lag or warehouse for the dynamic table",
         """
-        ALTER DYNAMIC TABLE <name> SET
+        ALTER DYNAMIC TABLE <dyn_table_name> SET
             [ TARGET_LAG = { '<num> { seconds | minutes | hours | days }'  | DOWNSTREAM } ]
             [ WAREHOUSE = <warehouse_name> ]
         """
@@ -1448,7 +1448,7 @@ def dynamic_table_segment():
     with drop_tab:
         st_code_block("drop-dynamic-table", "remove an existing dynamic table",
         """
-        DROP DYNAMIC TABLE [IF EXISTS] <name>
+        DROP DYNAMIC TABLE [IF EXISTS] <dyn_table_name>
         """
         )
 
@@ -1456,7 +1456,7 @@ def dynamic_table_segment():
     with describe_tab:
         st_code_block("desc-dynamic-table", "describe the columns in the dynamic table",
         """
-        DESC[RIBE] DYNAMIC TABLE <name>
+        DESC DYNAMIC TABLE <dyn_table_name>
         """
         )
 
