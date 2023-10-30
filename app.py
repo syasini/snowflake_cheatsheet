@@ -1288,7 +1288,7 @@ def procedure_segment():
             with in_line_tab:
                 st_code_block("create-procedure", "create or replace an existing in-line Python stored procedure",
                 """
-                CREATE [ OR REPLACE ] PROCEDURE <name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
+                CREATE [ OR REPLACE ] PROCEDURE <procedure_name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
                     RETURNS { <result_data_type> [ [ NOT ] NULL ] | TABLE ( [ <col_name> <col_data_type> [ , ... ] ] ) }
                     LANGUAGE PYTHON
                     RUNTIME_VERSION = '<python_version>'
@@ -1303,7 +1303,7 @@ def procedure_segment():
             with on_stage_tab:
                 st_code_block("create-procedure", "create or replace an existing Python stored procedure on stage",
                 """
-                CREATE [ OR REPLACE ] PROCEDURE <name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
+                CREATE [ OR REPLACE ] PROCEDURE <procedure_name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
                     RETURNS { <result_data_type> [ [ NOT ] NULL ] | TABLE ( [ <col_name> <col_data_type> [ , ... ] ] ) }
                     LANGUAGE PYTHON
                     RUNTIME_VERSION = '<python_version>'
@@ -1317,7 +1317,7 @@ def procedure_segment():
         with sql_tab:
             st_code_block("create-procedure", "create or replace an existing SQL procedure",
             """
-            CREATE [ OR REPLACE ] PROCEDURE <name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
+            CREATE [ OR REPLACE ] PROCEDURE <procedure_name> ( [ <arg_name> <arg_data_type> ] [ , ... ] )
                 RETURNS { <result_data_type> | TABLE ( [ <col_name> <col_data_type> [ , ... ] ] ) }
                 [ NOT NULL ]
                 LANGUAGE SQL
@@ -1349,19 +1349,19 @@ def procedure_segment():
         
         st_code_block("alter-procedure", "rename the procedure",
         """
-        ALTER PROCEDURE [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] ) RENAME TO <new_name>
+        ALTER PROCEDURE [ IF EXISTS ] <procedure_name> ( [ <arg_data_type> , ... ] ) RENAME TO <new_name>
         """
         )
 
         st_code_block("alter-procedure", "modify the comment on the procedure",
         """
-        ALTER FUNCTION [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] ) SET COMMENT = '<string_literal>'
+        ALTER FUNCTION [ IF EXISTS ] <procedure_name> ( [ <arg_data_type> , ... ] ) SET COMMENT = '<string_literal>'
         """
         )
 
         st_code_block("alter-procedure", "modify the executer privilege of the procedure",
         """
-        ALTER FUNCTION [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] ) EXECUTE AS { CALLER | OWNER }
+        ALTER FUNCTION [ IF EXISTS ] <procedure_name> ( [ <arg_data_type> , ... ] ) EXECUTE AS { CALLER | OWNER }
         """
         )
 
@@ -1369,7 +1369,7 @@ def procedure_segment():
     with drop_tab:
         st_code_block("drop-procedure", "remove an existing procedure",
         """
-        DROP PROCEDURE [ IF EXISTS ] <name> ( [ <arg_data_type> , ... ] )
+        DROP PROCEDURE [ IF EXISTS ] <procedure_name> ( [ <arg_data_type> , ... ] )
         """
         )
 
@@ -1377,7 +1377,7 @@ def procedure_segment():
     with describe_tab:
         st_code_block("desc-procedure", "describe the parameters of the procedure",
         """
-        DESC PROCEDURE <name> ( [ <arg_data_type> ] [ , ... ] )
+        DESC PROCEDURE <procedure_name> ( [ <arg_data_type> ] [ , ... ] )
         """
         )
 
