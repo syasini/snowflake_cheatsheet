@@ -1490,7 +1490,7 @@ def alert_segment():
         
         st_code_block("create-alert", "create or replace an existing alert",
         """
-        CREATE [ OR REPLACE ] ALERT [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] ALERT [ IF NOT EXISTS ] <alert_name>
             WAREHOUSE = <warehouse_name>
             SCHEDULE = '{ <num> MINUTE | USING CRON <expr> <time_zone> }'
             COMMENT = '<string_literal>'
@@ -1519,13 +1519,13 @@ def alert_segment():
         
         st_code_block("alter-alert", "resume or suspend the alert",
         """
-        ALTER ALERT [ IF EXISTS ] <name> { RESUME | SUSPEND }
+        ALTER ALERT [ IF EXISTS ] <alert_name> { RESUME | SUSPEND }
         """
         )
 
         st_code_block("alter-alert", "alter the alert properties",
         """
-        ALTER ALERT [ IF EXISTS ] <name> SET
+        ALTER ALERT [ IF EXISTS ] <alert_name> SET
             [ WAREHOUSE = <string> ]
             [ SCHEDULE = '{ <number> MINUTE | USING CRON <expr> <time_zone> }' ]
             [ COMMENT = '<string_literal>' ]
@@ -1534,20 +1534,20 @@ def alert_segment():
 
         st_code_block("alter-alert", "modify the alert condition",
         """
-        ALTER ALERT [ IF EXISTS ] <name> MODIFY CONDITION EXISTS (<condition>)
+        ALTER ALERT [ IF EXISTS ] <alert_name> MODIFY CONDITION EXISTS (<condition>)
         """
         )
 
         st_code_block("alter-alert", "modify the alert action",
         """
-        ALTER ALERT [ IF EXISTS ] <name> MODIFY ACTION <action>
+        ALTER ALERT [ IF EXISTS ] <alert_name> MODIFY ACTION <action>
         """
         )
 
     with drop_tab:
         st_code_block("drop-alert", "remove an existing alert",
         """
-        DROP ALERT <name>
+        DROP ALERT <alert_name>
         """
         )
 
@@ -1555,7 +1555,7 @@ def alert_segment():
     with describe_tab:
         st_code_block("desc-alert", "describe the propoerties of the alert",
         """
-        DESCRIBE ALERT <name>
+        DESCRIBE ALERT <alert_name>
         """
         )
 
@@ -1584,7 +1584,7 @@ def alert_segment():
         st.markdown("""
         💡 **Tips**
         - Set up `ALERT`s to be notified or take actions when specific conditions in your data are met (e.g. warehouse credit usage surpassing a threshold, or data sanity checks failing).
-        - Newly created or cloned `ALERT`s are suspended upon creation. Remember to resume the alert for it to execute using `ALTER ALERT <name> RESUME`.
+        - Newly created or cloned `ALERT`s are suspended upon creation. Remember to resume the alert for it to execute using `ALTER ALERT <alert_name> RESUME`.
         - Monitor `ALERT` execution by checking the results of the specified actions or by viewing the history of alert executions. You can use the `ALERT_HISTORY` table function or the `ALERT_HISTORY` view in the `ACCOUNT_USAGE` schema for this purpose.
         """)
 
