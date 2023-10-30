@@ -988,7 +988,7 @@ def task_segment():
         
         st_code_block("create-task",  "create or replace an existing task",
         """
-        CREATE [ OR REPLACE ] TASK [ IF NOT EXISTS ] <name>
+        CREATE [ OR REPLACE ] TASK [ IF NOT EXISTS ] <task_name>
             [ WAREHOUSE = <string> ]
             [ SCHEDULE = '{ <num> MINUTE | USING CRON <expr> <time_zone> }' ]
             [ ALLOW_OVERLAPPING_EXECUTION = TRUE | FALSE ]
@@ -1020,19 +1020,19 @@ def task_segment():
         
         st_code_block("alter-task", "resume or suspend a task",
         """
-        ALTER TASK [ IF EXISTS ] <name> { RESUME | SUSPEND }
+        ALTER TASK [ IF EXISTS ] <task_name> { RESUME | SUSPEND }
         """
         )
 
         st_code_block("alter-task", "change the location in the [DAG of tasks](https://docs.snowflake.com/en/user-guide/tasks-intro#label-task-dag)",
         """
-        ALTER TASK [ IF EXISTS ] <name> REMOVE AFTER <string> [ , <string> , ... ] | ADD AFTER <string> [ , <string> , ... ]
+        ALTER TASK [ IF EXISTS ] <task_name> REMOVE AFTER <string> [ , <string> , ... ] | ADD AFTER <string> [ , <string> , ... ]
         """
         )
 
         st_code_block("alter-task", "change the task parameters",
         """
-        ALTER TASK [ IF EXISTS ] <name> SET
+        ALTER TASK [ IF EXISTS ] <task_name> SET
             [ WAREHOUSE = <string> ]
             [ SCHEDULE = '{ <number> MINUTE | USING CRON <expr> <time_zone> }' ]
             [ ALLOW_OVERLAPPING_EXECUTION = TRUE | FALSE ]
@@ -1045,7 +1045,7 @@ def task_segment():
 
         st_code_block("alter-task", "modify the task definition",
         """
-        ALTER TASK [ IF EXISTS ] <name> MODIFY AS <sql>
+        ALTER TASK [ IF EXISTS ] <task_name> MODIFY AS <sql>
         """
         )
 
@@ -1053,7 +1053,7 @@ def task_segment():
     with drop_tab:
         st_code_block("drop-task", "remove an existing task",
         """
-        DROP TASK [ IF EXISTS ] <name>
+        DROP TASK [ IF EXISTS ] <task_name>
         """
         )
 
@@ -1061,7 +1061,7 @@ def task_segment():
     with describe_tab:
         st_code_block("desc-task", "describe the columns in the task",
         """
-        DESC TASK <name> 
+        DESC TASK <task_name> 
         """
         )
 
@@ -1426,19 +1426,19 @@ def dynamic_table_segment():
         
         st_code_block("alter-dynamic-table", "resume or suspend the dynamic table",
         """
-        ALTER DYNAMIC TABLE <dyn_table_name>  { SUSPEND | RESUME }
+        ALTER DYNAMIC TABLE [ IF EXISTS ] <dyn_table_name>  { SUSPEND | RESUME }
         """
         )
 
         st_code_block("alter-dynamic-table", "manually refresh the dynamic table",
         """
-        ALTER DYNAMIC TABLE <dyn_table_name> REFRESH
+        ALTER DYNAMIC TABLE [ IF EXISTS ] <dyn_table_name> REFRESH
         """
         )
 
         st_code_block("alter-dynamic-table", "update the target lag or warehouse for the dynamic table",
         """
-        ALTER DYNAMIC TABLE <dyn_table_name> SET
+        ALTER DYNAMIC TABLE [ IF EXISTS ] <dyn_table_name> SET
             [ TARGET_LAG = { '<num> { seconds | minutes | hours | days }'  | DOWNSTREAM } ]
             [ WAREHOUSE = <warehouse_name> ]
         """
