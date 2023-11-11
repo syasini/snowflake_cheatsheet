@@ -1,3 +1,11 @@
+## IMPORTANT CALL OUT 
+## ==================
+## As you may have noticed, this script can use a lot of refactoring 
+## and should be broken down into multiple modules for better readability 
+## and easier maintanance. If you are interested in helping out,
+## please open an issue/PR and contribute to the project. 
+## The community will greatly appreciate your help and contribution! 
+
 import streamlit as st
 
 st.set_page_config(page_title='Snowflake', layout='wide',
