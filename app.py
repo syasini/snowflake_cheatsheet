@@ -1680,7 +1680,7 @@ left_column_defaults = [
     "🔄 dynamic table", 
     "📋 task",
     "🌊 stream",
-     "🚨 alert",
+    "🚨 alert",
     ]
 
 right_column_defaults = [
@@ -1774,3 +1774,11 @@ Don't hesitate to jump to the GitHub repository to open an issue or start a pull
 Your expertise can help us keep this guide up-to-date and comprehensive.
 """
 )
+
+with st.sidebar.expander("Acknowledgments"):
+    st.markdown("""
+    I am incredibly grateful to my amazing Snowflake mentor, [Sang Hai](https://www.linkedin.com/in/sangvhai/), who is always sharing his extensive knowledge about the exciting and innovative features of Snowflake and guiding me in implementing them in my work. 
+    I would also like to express my heartfelt appreciation to [Kathryn Reck Harris](https://www.linkedin.com/in/kathrynreck/) and [Varun Chavakula](https://www.linkedin.com/in/varunchavakula/), my awesome Snowflake buddies, who always share the exhilarating ride of exploring Snowflake and provide invaluable insights and support.
+
+    Lastly, a special thanks to [**Jessica Smith**](https://www.linkedin.com/in/jessica-s-095a861b3/), a true champion of the Streamlit platform, for always encouraging me to create fun things in Streamlit and for her continuous support within the vibrant Streamlit community.
+    """)
