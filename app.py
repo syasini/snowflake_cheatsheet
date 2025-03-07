@@ -56,6 +56,7 @@ st.sidebar.caption("Made by an [Ungifted Amateur](https://www.linkedin.com/in/si
 st.sidebar.caption("Check out the accompanying Snowflake tutorial [here](https://medium.com/snowflake/the-ungifted-amateurs-guide-to-snowflake-449284e4bd72).")
 
 with st.sidebar.expander("See My Other Streamlit Apps"):
+    st.caption("streamliTissues: [App](https://tissues.streamlit.app/) 🎈")
     st.caption("Sophisticated Palette: [App](https://sophisticated-palette.streamlit.app/) 🎈,  [Blog Post](https://blog.streamlit.io/create-a-color-palette-from-any-image/) 📝")
     st.caption("Wordler: [App](https://wordler.streamlit.app/) 🎈,  [Blog Post](https://blog.streamlit.io/the-ultimate-wordle-cheat-sheet/) 📝")
     st.caption("Koffee of the World: [App](https://koffee.streamlit.app/) 🎈")
