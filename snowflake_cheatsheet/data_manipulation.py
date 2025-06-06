@@ -88,7 +88,7 @@ left_column_defaults = [
     "🗄 database", 
     "🗃 schema",
     "📊 table", 
-    "🔎 view",
+    "👁️ view",
     "📸 materialized view",
     "🔄 dynamic table", 
     "📋 task",

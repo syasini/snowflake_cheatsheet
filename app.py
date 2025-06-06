@@ -21,6 +21,7 @@ from snowflake_cheatsheet.function import function_segment
 from snowflake_cheatsheet.procedure import procedure_segment
 from snowflake_cheatsheet.dynamic_table import dynamic_table_segment
 from snowflake_cheatsheet.alert import alert_segment
+from snowflake_cheatsheet.cortex_search import cortex_search_segment
 from snowflake_cheatsheet.data_manipulation import data_manipulation_segment
 from snowflake_cheatsheet.layout import default_layout
 
@@ -28,7 +29,7 @@ st.set_page_config(page_title='Snowflake', layout='wide',
                 #    initial_sidebar_state=st.session_state.get('sidebar_state', 'collapsed'),
 )
 
-st.image("./logo/ungifted_amateur_v5.png", use_container_width=True )
+st.image("./logo/snowflake_cheatsheet_logo_v2.png", use_container_width=True )
 
 st.snow()
 
@@ -85,7 +86,7 @@ left_column_defaults = [
     "🗄 database",
     "🗃 schema",
     "📊 table",
-    "🔎 view",
+    "👁️ view",
     "📸 materialized view",
     "🔄 dynamic table",
     "📋 task",
@@ -94,6 +95,7 @@ left_column_defaults = [
 ]
 
 right_column_defaults = [
+    "🧠 cortex search",
     "🚉 stage",
     "🚚 data loading",
     "🌀 data manipulation",
@@ -125,7 +127,7 @@ segment_dict = {
     "🗄 database": database_segment,
     "📊 table": table_segment,
     "🗃 schema": schema_segment,
-    "🔎 view": view_segment,
+    "👁️ view": view_segment,
     "📸 materialized view": materialized_view_segment,
     "🚉 stage": stage_segment,
     "🚰 pipe": pipe_segment,
@@ -136,6 +138,7 @@ segment_dict = {
     "🪜 procedure": procedure_segment,
     "🔄 dynamic table": dynamic_table_segment,
     "🚨 alert": alert_segment,
+    "🧠 cortex search": cortex_search_segment,
     "🌀 data manipulation": data_manipulation_segment,
 
 }
