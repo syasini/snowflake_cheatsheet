@@ -29,7 +29,7 @@ st.set_page_config(page_title='Snowflake', layout='wide',
                 #    initial_sidebar_state=st.session_state.get('sidebar_state', 'collapsed'),
 )
 
-st.image("./logo/ungifted_amateur_v5.png", use_container_width=True )
+st.image("./logo/snowflake_cheatsheet_logo.png", use_container_width=True )
 
 st.snow()
 
