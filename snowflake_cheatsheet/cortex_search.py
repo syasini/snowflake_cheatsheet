@@ -87,7 +87,7 @@ def cortex_search_segment():
         st.markdown(
             """
             💡 **Tips**
-            - Use the SEARCH_PREVIEW SQL function only for quick testing and validation—it’s slower and has a strict 300 KB response limit.
+            - Use the `SEARCH_PREVIEW` SQL function only for quick testing and validation—it’s slower and has a strict 300 KB response limit.
             - Choose your query method based on the use case: use the Python API for pipelines, REST API for external apps, and SQL for simple previews.
             - Improve search result ranking by applying `numeric_boosts` (with columns and weights) and `time_decays` (for recency signals) during queries.
             - To reduce embedding costs, avoid frequent row updates, as any change—even outside the search column—triggers re-embedding.
