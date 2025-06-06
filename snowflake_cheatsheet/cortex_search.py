@@ -13,40 +13,50 @@ def cortex_search_segment():
 
     with create_tab:
         st_code_block(
-            "create-search-service",
-            "create or replace a search service",
+            "create-cortex-search",
+            "create or replace a cortex search service",
             """
-            CREATE [ OR REPLACE ] SEARCH SERVICE <service_name>
-                INDEX <index_name>
-                [ WAREHOUSE = <warehouse_name> ]
-                [ COMMENT = '<string_literal>' ]
+            CREATE [ OR REPLACE ] CORTEX SEARCH SERVICE [ IF NOT EXISTS ] <name>
+              ON <search_column>
+              ATTRIBUTES <col_name> [ , ... ]
+              WAREHOUSE = <warehouse_name>
+              TARGET_LAG = '<num> { seconds | minutes | hours | days }'
+              AS <query>;
             """,
         )
 
     with alter_tab:
         st_code_block(
-            "alter-search-service",
-            "suspend or resume a search service",
+            "alter-cortex-search",
+            "suspend or resume indexing or serving",
             """
-            ALTER SEARCH SERVICE [ IF EXISTS ] <service_name> { SUSPEND | RESUME }
+            ALTER CORTEX SEARCH SERVICE [ IF EXISTS ] <name>
+              { SUSPEND | RESUME } [ { INDEXING | SERVING } ]
             """,
         )
 
         st_code_block(
-            "alter-search-service",
-            "modify search service properties",
+            "alter-cortex-search",
+            "refresh the service",
             """
-            ALTER SEARCH SERVICE [ IF EXISTS ] <service_name> SET
-                [ INDEX = <index_name> ]
-                [ WAREHOUSE = <warehouse_name> ]
-                [ COMMENT = '<string_literal>' ]
+            ALTER CORTEX SEARCH SERVICE [ IF EXISTS ] <name> REFRESH
+            """,
+        )
+
+        st_code_block(
+            "alter-cortex-search",
+            "update target lag or warehouse",
+            """
+            ALTER CORTEX SEARCH SERVICE [ IF EXISTS ] <name> SET
+              [ TARGET_LAG = '<num> { seconds | minutes | hours | days }' ]
+              [ WAREHOUSE = <warehouse_name> ]
             """,
         )
 
     with show_tab:
         st_code_block(
-            "show-search-services",
-            "show available search services",
+            "show-cortex-search",
+            "show available cortex search services",
             """
             SHOW SEARCH SERVICES [ LIKE '<pattern>' ]
                                 [ IN { ACCOUNT | DATABASE [ <db_name> ] | [ SCHEMA ] [ <schema_name> ] } ]
@@ -57,19 +67,19 @@ def cortex_search_segment():
 
     with describe_tab:
         st_code_block(
-            "describe-search-service",
-            "describe a search service",
+            "describe-cortex-search",
+            "describe a cortex search service",
             """
-            DESCRIBE SEARCH SERVICE <service_name>
+            DESCRIBE CORTEX SEARCH SERVICE <name>
             """,
         )
 
     with drop_tab:
         st_code_block(
-            "drop-search-service",
-            "remove a search service",
+            "drop-cortex-search",
+            "remove a cortex search service",
             """
-            DROP SEARCH SERVICE [ IF EXISTS ] <service_name>
+            DROP CORTEX SEARCH SERVICE [ IF EXISTS ] <name>
             """,
         )
 
@@ -83,7 +93,7 @@ def cortex_search_segment():
             - To reduce embedding costs, avoid frequent row updates, as any change—even outside the search column—triggers re-embedding.
             - Set the `TARGET_LAG` parameter based on your business needs to avoid unnecessary refreshes and compute costs.
             - Disable reranking during queries to reduce latency by 100–300ms if precise result quality is not essential.
-            - Suspend the service when it’s not actively serving queries to avoid ongoing serving compute charges.
+            - Suspend the service when it's not actively serving queries to avoid ongoing serving compute charges.
             - Keep the source query simple and avoid joins or complex transformations to reduce indexing time and cost.
             - Monitor compute and serving costs using the `CORTEX_SEARCH_DAILY_USAGE_HISTORY` and `CORTEX_SEARCH_SERVING_USAGE_HISTORY` views.
             """

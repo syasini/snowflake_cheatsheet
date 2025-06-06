@@ -95,13 +95,13 @@ left_column_defaults = [
 ]
 
 right_column_defaults = [
+    "🧠 cortex search",
     "🚉 stage",
     "🚚 data loading",
     "🌀 data manipulation",
     "🪄 function",
     "🪜 procedure",
     "🚰 pipe",
-    "🧠 cortex search",
 ]
 
 all_segments = left_column_defaults + right_column_defaults
