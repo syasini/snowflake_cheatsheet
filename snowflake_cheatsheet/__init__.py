@@ -12,6 +12,7 @@ from .function import function_segment
 from .procedure import procedure_segment
 from .dynamic_table import dynamic_table_segment
 from .alert import alert_segment
+from .cortex_search import cortex_search_segment
 from .data_manipulation import data_manipulation_segment
 from .layout import default_layout
 from .utils import st_code_block, make_tabs, code_block
@@ -31,6 +32,7 @@ __all__ = [
     "procedure_segment",
     "dynamic_table_segment",
     "alert_segment",
+    "cortex_search_segment",
     "data_manipulation_segment",
     "default_layout",
     "st_code_block",

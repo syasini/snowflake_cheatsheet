@@ -2,7 +2,10 @@ import streamlit as st
 from .utils import st_code_block, make_tabs
 
 def view_segment():
-    st.header("🔎 View", help="The thing that let's you see the whole or a segment of your data in a special way.")
+    st.header(
+        "👁️ View",
+        help="The thing that let's you see the whole or a segment of your data in a special way.",
+    )
     
     create_tab, alter_tab, drop_tab, describe_tab, show_tab, tips_tab = \
         make_tabs(["CREATE", "ALTER", "DROP", "DESCRIBE", "SHOW", "❄️"])
